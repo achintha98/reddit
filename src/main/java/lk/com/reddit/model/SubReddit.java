@@ -37,5 +37,6 @@ public class SubReddit {
     private List<Post> posts;
     private Instant createdDate;
     @ManyToOne(fetch = LAZY)
+    @JoinColumn(name = "app_user_id", referencedColumnName = "app_user_id")
     private AppUser appUser;
 }

@@ -21,6 +21,7 @@ public class VerificationToken {
     private Long verificationTokenId;
     private String token;
     @OneToOne(fetch = LAZY)
+    @JoinColumn(name = "app_user_id", referencedColumnName = "app_user_id")
     private AppUser appUser;
     private Instant expiryDate;
 }

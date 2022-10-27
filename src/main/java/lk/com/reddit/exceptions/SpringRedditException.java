@@ -5,7 +5,7 @@ package lk.com.reddit.exceptions;
  * @since 10/27/2022
  */
 public class SpringRedditException extends RuntimeException{
-    public SpringRedditException(String exception) {
-        super(exception);
+    public SpringRedditException(String message) {
+        super(message);
     }
 }

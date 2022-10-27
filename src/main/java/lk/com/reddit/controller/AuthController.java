@@ -1,10 +1,10 @@
 package lk.com.reddit.controller;
 
 import lk.com.reddit.dto.RegisterRequest;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lk.com.reddit.service.AuthService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author Achintha Kalunayaka
@@ -13,9 +13,21 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
+    private final AuthService authService;
+
+    public AuthController(AuthService authService) {
+        this.authService = authService;
+    }
 
     @PostMapping("signup")
-    public void signUp(@RequestBody RegisterRequest registerRequest) {
+    public ResponseEntity<String> signUp(@RequestBody RegisterRequest registerRequest) {
+        authService.signUp(registerRequest);
+        return new ResponseEntity<>("User Registration Successful", HttpStatus.OK);
+    }
 
+    @GetMapping("accountVerification/{token}")
+    public ResponseEntity<String> verifyAccount(@PathVariable String token) {
+        authService.verifyAccount(token);
+        return new ResponseEntity<>("Account activated successfully", HttpStatus.OK);
     }
 }
